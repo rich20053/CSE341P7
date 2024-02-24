@@ -5,7 +5,7 @@
     "description": "API for My Music Collection",
     "version": "1.0.0"
   },
-  "host": "week6service.onrender.com",
+  "host": "week7service.onrender.com",
   "basePath": "/", 
   "schemes": [
     "https"
