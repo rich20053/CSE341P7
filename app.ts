@@ -1,3 +1,5 @@
+import { MongoClient, MongoDBCollectionNamespace, MongoDBNamespace } from "mongodb";
+
 const express = require('express');
 const mongodb = require('./models/connect');
 const bodyParser = require('body-parser');
@@ -9,12 +11,12 @@ app
   .use(bodyParser.json())
   .use('/', require('./routes'))
   .use(express.urlencoded({ extended: true }))
-  .use((req, res, next) => {
+  .use((req: any, res: { setHeader: (arg0: string, arg1: string) => void; }, next: () => void) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
   })
 
-mongodb.initDb((err, mongodb) => {
+mongodb.initDb((err: string, mongodb: MongoClient) => {
   if (err) {
     console.log(err);
   } else {

@@ -2,18 +2,18 @@ const cal_mongodb = require('../models/connect');
 const Cal_objectId = require('mongodb').ObjectId;
 
 // Return all albums
-const getAllAlbums = async (req, res, next) => {
+const getAllAlbums = async (req: any, res: any, next: any) => {
   
   const result = await cal_mongodb.getDb().db("music").collection('albums').find();
   //console.log(result);
-  result.toArray().then((lists) => {
+  result.toArray().then((lists: object[]) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
   });
 };
 
 // Return one album by id
-const getSingleAlbum = async (req, res, next) => {
+const getSingleAlbum = async (req: any, res: any, next: any) => {
   if (!Cal_objectId.isValid(req.params.id)) {
     res.status(400).json("Must use a valid contact id to update a contact");
     return;
@@ -22,14 +22,14 @@ const getSingleAlbum = async (req, res, next) => {
   const userId = new Cal_objectId(req.params.id);
 
   const result = await cal_mongodb.getDb().db("music").collection('albums').find({ _id: userId });
-  result.toArray().then((lists) => {
+  result.toArray().then((lists: any) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists[0]);
   });
 };
 
 // Create one album from body json
-const createAlbum = async (req, res, next) => {
+const createAlbum = async (req: any, res: any, next: any) => {
 
   var artistId = new Cal_objectId;
 
@@ -77,7 +77,7 @@ const createAlbum = async (req, res, next) => {
 };
   
 // Update a single album
-const updateAlbumById = async (req, res, next) => {
+const updateAlbumById = async (req: any, res: any, next: any) => {
   if (!Cal_objectId.isValid(req.params.id)) {
     res.status(400).json("Must use a valid contact id to update a contact");
     return;
@@ -108,7 +108,7 @@ const updateAlbumById = async (req, res, next) => {
 }; 
 
 // Delete one albums
-const deleteAlbum = async (req, res, next) => {
+const deleteAlbum = async (req: any, res: any, next: any) => {
   if (!Cal_objectId.isValid(req.params.id)) {
     res.status(400).json("Must use a valid contact id to update a contact");
     return;

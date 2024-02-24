@@ -3,11 +3,11 @@ const car_mongodb = require('../models/connect');
 const Car_objectId = require('mongodb').ObjectId;
 
 // Return all artists
-const getAllArtists = async (req, res, next) => {
+const getAllArtists = async (req: any, res: any, next: any) => {
   
   const result = await car_mongodb.getDb().db("music").collection('artists').find();
   console.log(result.toArray.length);
-  result.toArray().then((lists) => {
+  result.toArray().then((lists: any) => {
     res.setHeader('Content-Type', 'application/json');
     console.log(lists);
     res.status(200).json(lists);
@@ -15,7 +15,7 @@ const getAllArtists = async (req, res, next) => {
 };
 
 // Return one artist by id
-const getSingleArtist = async (req, res, next) => {
+const getSingleArtist = async (req: any, res: any, next: any) => {
   if (!Car_objectId.isValid(req.params.id)) {
     res.status(400).json("Must use a valid contact id to update a contact");
     return;
@@ -24,7 +24,7 @@ const getSingleArtist = async (req, res, next) => {
   const userId = new Car_objectId(req.params.id);
   console.log("artist single routes");
   const result = await car_mongodb.getDb().db("music").collection('artists').find({ _id: userId });
-  result.toArray().then((lists) => {
+  result.toArray().then((lists: any) => {
     if (lists.length != 0) {
       res.setHeader('Content-Type', 'application/json');
       res.status(200).json(lists[0]);
@@ -36,7 +36,7 @@ const getSingleArtist = async (req, res, next) => {
 };
 
 // Create one artist from body json
-const createArtist = async (req, res, next) => {
+const createArtist = async (req: any, res: any, next: any) => {
 
   // Create an artist
   const artist = {
@@ -55,7 +55,7 @@ const createArtist = async (req, res, next) => {
 };
   
 // Update a single artist
-const updateArtist = async (req, res, next) => {
+const updateArtist = async (req: any, res: any, next: any) => {
   if (!Car_objectId.isValid(req.params.id)) {
     res.status(400).json("Must use a valid contact id to update a contact");
     return;
@@ -80,7 +80,7 @@ const updateArtist = async (req, res, next) => {
 }; 
 
 // Delete one artist
-const deleteArtist = async (req, res, next) => {
+const deleteArtist = async (req: any, res: any, next: any) => {
   if (!Car_objectId.isValid(req.params.id)) {
     res.status(400).json("Must use a valid contact id to update a contact");
     return;

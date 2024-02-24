@@ -1,13 +1,13 @@
 const mw_validator = require('../util/validate');
 
 // Check data to be added to the artist collection
-const artistCheck = async (req, res, next) => {
+const artistCheck = async (req: any, res: any, next: any) => {
     const validationRule = {
       "name": "required|string",
       "type": "required|string"
     };
 
-    await mw_validator(req.body, validationRule, {}, (err, status) => {
+    await mw_validator(req.body, validationRule, {}, (err: any, status: any) => {
         if (!status) {
             res.status(412)
                 .send({
@@ -18,10 +18,10 @@ const artistCheck = async (req, res, next) => {
         } else {
             next();
         }
-    }).catch( err => console.log(err))
+    }).catch( (err: any) => console.log(err))
 }
 
-const albumCheck = async (req, res, next) => {
+const albumCheck = async (req: any, res: any, next: any) => {
     const validationRule = {
       "title": "required|string",
       "artist_id": "required|string|min:24|max:24",
@@ -33,7 +33,7 @@ const albumCheck = async (req, res, next) => {
       "discnbr": "integer"
     };
 
-    await mw_validator(req.body, validationRule, {}, (err, status) => {
+    await mw_validator(req.body, validationRule, {}, (err: any, status: any) => {
         if (!status) {
             res.status(412)
                 .send({
@@ -44,10 +44,10 @@ const albumCheck = async (req, res, next) => {
         } else {
             next();
         }
-    }).catch( err => console.log(err))
+    }).catch( (err: any) => console.log(err))
 }
 
-const songCheck = async (req, res, next) => {
+const songCheck = async (req: any, res: any, next: any) => {
     const validationRule = {
       "title": "required|string",
       "artist_id": "required|string|min:24|max:24",
@@ -55,7 +55,7 @@ const songCheck = async (req, res, next) => {
       "time": "string"
     };
 
-    await mw_validator(req.body, validationRule, {}, (err, status) => {
+    await mw_validator(req.body, validationRule, {}, (err: any, status: any) => {
         if (!status) {
             res.status(412)
                 .send({
@@ -66,7 +66,7 @@ const songCheck = async (req, res, next) => {
         } else {
             next();
         }
-    }).catch( err => console.log(err))
+    }).catch( (err: any) => console.log(err))
 }
 
 module.exports = {
