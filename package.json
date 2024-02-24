@@ -19,6 +19,7 @@
     "validatorjs": "^3.22.1"
   },
   "devDependencies": {
+    "@types/node": "^20.11.20",
     "jshint": "^2.13.6"
   }
 }
