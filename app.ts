@@ -1,5 +1,7 @@
 import { MongoClient, MongoDBCollectionNamespace, MongoDBNamespace } from "mongodb";
 
+var dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
 const mongodb = require('./models/connect');
 const bodyParser = require('body-parser');
@@ -13,15 +15,15 @@ app
   .use(bodyParser.json())
   .use('/', require('./routes'))
   .use(express.urlencoded({ extended: true }))
-  .use((req: any, res: { setHeader: (arg0: string, arg1: string) => void; }, next: () => void) => {
+  .use((req: any, res: { setHeader: (arg0: any, arg1: any) => void; }, next: () => void) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
   })
 
 // Configure Google OAuth 2.0 Strategy
 passport.use(new GoogleStrategy({
-    clientID: 'YOUR_GOOGLE_CLIENT_ID',
-    clientSecret: 'YOUR_GOOGLE_CLIENT_SECRET',
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: 'http://localhost:8080/auth/google/callback'
   },
   (accessToken: any, refreshToken: any, profile: any, done: any) => {
